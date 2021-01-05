@@ -11,11 +11,11 @@ services:
     volumes:
       - {{ CLICKHOUSE_CONTAINER_NAME }}:/var/lib/clickhouse
     ulimits:
-   	  nofile:
-   	    soft: {{ CLICKHOUSE_NOFILE_SOFT }}
-   	    hard: {{ CLICKHOUSE_NOFILE_HARD }}
-   	networks:
-   	  - {{ CLICKHOUSE_NETWORK }}
+      nofile:
+        soft: {{ CLICKHOUSE_NOFILE_SOFT }}
+        hard: {{ CLICKHOUSE_NOFILE_HARD }}
+    networks:
+      - {{ CLICKHOUSE_NETWORK }}
 
 volumes:
   {{ CLICKHOUSE_CONTAINER_NAME }}
