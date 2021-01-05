@@ -18,7 +18,7 @@ services:
       - {{ CLICKHOUSE_NETWORK }}
 
 volumes:
-  {{ CLICKHOUSE_CONTAINER_NAME }}
+  {{ CLICKHOUSE_CONTAINER_NAME }}:
 
 networks:
   {{ CLICKHOUSE_NETWORK }}:
