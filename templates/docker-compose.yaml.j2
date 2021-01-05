@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+
+  clickhouse:
+    container_name: {{ CLICKHOUSE_CONTAINER_NAME }}
+    image: {{ CLICKHOUSE_IMAGE }}
+    restart: always
+    ports:
+      - {{ CLICKHOUSE_PORT }}:8123
+    volumes:
+      - {{ CLICKHOUSE_CONTAINER_NAME }}:/var/lib/clickhouse
+    ulimits:
+   	  nofile:
+   	    soft: {{ CLICKHOUSE_NOFILE_SOFT }}
+   	    hard: {{ CLICKHOUSE_NOFILE_HARD }}
+   	networks:
+   	  - {{ CLICKHOUSE_NETWORK }}
+
+volumes:
+  {{ CLICKHOUSE_CONTAINER_NAME }}
+
+networks:
+  {{ CLICKHOUSE_NETWORK }}:
+    name: {{ CLICKHOUSE_NETWORK }}

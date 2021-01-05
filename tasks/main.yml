@@ -1,0 +1,19 @@
+---
+# tasks file for clickhouse
+
+- name: 清除旧容器
+  shell: 'docker-compose -f {{ OPT_PATH }}/{{ CLICKHOUSE_CONTAINER_NAME }}/docker-compose.yaml rm -fsva;rm -rf {{ OPT_PATH }}/{{ CLICKHOUSE_CONTAINER_NAME }}'
+  ignore_errors: yes
+
+- name: 创建部署目录
+  shell: '[[ ! -d "{{ OPT_PATH }}/{{ CLICKHOUSE_CONTAINER_NAME }}" ]] && mkdir -vp {{ OPT_PATH }}/{{ CLICKHOUSE_CONTAINER_NAME }}'
+  ignore_errors: yes
+
+#- name: 配置环境变量
+#  copy: src=files/{{ CLICKHOUSE_CONTAINER_NAME }}.env dest={{ OPT_PATH }}/{{ CLICKHOUSE_CONTAINER_NAME }}/.env
+
+- name: 配置 clickhouse docker-compose.yaml
+  template: src=docker-compose.yaml.j2 dest={{ OPT_PATH }}/{{ CLICKHOUSE_CONTAINER_NAME }}/docker-compose.yaml
+
+- name: 运行服务
+  shell: 'docker-compose -f {{ OPT_PATH }}/{{ CLICKHOUSE_CONTAINER_NAME }}/docker-compose.yaml up -d'
